@@ -1,8 +1,6 @@
 import React,{useState}  from 'react'
-import ReactDOM from 'react-dom'
 
 export default function Todo({user, title, create_date, description}) {
-    const today = Date(Date.now()).toString()
     const [status,setStatus] = useState('')
     function checkboxStatus(evt) {
         setStatus(evt.target.value)
