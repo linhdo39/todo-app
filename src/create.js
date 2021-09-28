@@ -13,9 +13,9 @@ export default function Create ({user}) {
                        <label htmlFor="create-description">Description: </label>
                        <textarea />
                    </div>
-                   //<div>
-                   //   <label htmlFor="create-date"> Create Date: {Date(Date.now()).toString()}</label>
-                   //</div>
+                   {/*(}<div>
+                      <label htmlFor="create-date"> Create Date: {Date(Date.now()).toString()}</label>
+                   </div>)*/}
               <input type="submit" value="Create" />
            </form>
           )
