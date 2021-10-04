@@ -11,7 +11,6 @@ export default function Todo({id,user, title, create_date, description,completed
     return (
         <div>
             <h3>{title}</h3>
-            <p> {id}</p>
             <p>Create by: {user}</p>
             <p>Description: {description}</p>
             <p>Date Created: {create_date} </p>
