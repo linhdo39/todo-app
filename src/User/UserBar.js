@@ -1,17 +1,18 @@
+import React from 'react'
+
 import Logout from './logout'
-import Registration from './registration'
+import Register from './registration'
 import Login from './login'
 
-export default function Todolist() {
-     const user='Linh'
-     if (user) {
-          return <Logout user={user} />
-     } else {
-          return (
-              <>
-                <Login />
-                <Registration />
-              </>
-          )
-    }
+export default function User({user, dispatchUser}) {
+  if (user) {
+      return <Logout user={user} dispatchUser={dispatchUser} />
+  } else {
+      return (
+          <>
+            <Login dispatchUser={dispatchUser} />
+            <Register dispatchUser={dispatchUser} />
+          </>
+      )
+  }
 }
