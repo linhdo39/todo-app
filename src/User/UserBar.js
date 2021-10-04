@@ -11,7 +11,7 @@ export default function User({user, dispatchUser}) {
       return (
           <>
             <Login dispatchUser={dispatchUser} />
-            <Register dispatchUser={dispatchUser} />
+            <Registration dispatchUser={dispatchUser} />
           </>
       )
   }
