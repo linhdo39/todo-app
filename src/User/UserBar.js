@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Logout from './logout'
-import Register from './registration'
+import Registration from './registration'
 import Login from './login'
 
 export default function User({user, dispatchUser}) {
