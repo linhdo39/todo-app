@@ -35,7 +35,7 @@ function App() {
         }
     ]
 
-    const [state, dispatch] = useReducer(todoReducer, { user: '', todos: initialTodos })
+    const [state, dispatch] = useReducer(reducer, { user: '', todos: initialTodos })
     const {user, todos} = state;
 
     useEffect(() => {
