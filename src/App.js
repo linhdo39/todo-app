@@ -2,12 +2,12 @@ import {useReducer, useEffect} from 'react';
 import User from './User/UserBar'
 import Create from './create'
 import Todolist from './todolist'
-import appReducer from './appReducer';
+import reducer from './todoReducer';
 
 function App() {
     const initialTodos = [
         {
-            id: new Date().getTime()+Math.random(),
+            id: new Date().getTime()*Math.random(),
             user: "Linh",
             title: "Homework",
             create_date: Date(Date.now()).toString(),
@@ -16,7 +16,7 @@ function App() {
             completed_date:''
         },
         {
-            id: new Date().getTime()+Math.random(),
+            id: new Date().getTime()*Math.random(),
             user: "Linh",
             title: "House",
             create_date: Date(Date.now()).toString(),
@@ -25,7 +25,7 @@ function App() {
             completed_date:''
         },
         {
-            id: new Date().getTime()+Math.random(),
+            id: new Date().getTime()*Math.random(),
             user: "Linh",
             title: "Cook",
             create_date: Date(Date.now()).toString(),
@@ -35,7 +35,7 @@ function App() {
         }
     ]
 
-    const [state, dispatch] = useReducer(appReducer, { user: '', todos: initialTodos })
+    const [state, dispatch] = useReducer(todoReducer, { user: '', todos: initialTodos })
     const {user, todos} = state;
 
     useEffect(() => {
