@@ -2,7 +2,7 @@ import {useReducer, useEffect} from 'react';
 import User from './User/UserBar'
 import Create from './create'
 import Todolist from './todolist'
-import reducer from './todoReducer';
+import reducer from './reducer';
 
 function App() {
     const initialTodos = [
