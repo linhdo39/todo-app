@@ -32,8 +32,9 @@ function userReducer (state, action) {
                 if (todo.id === action.id) {
                     todo.completed= !action.completed;
                     todo.completed_date = Date(Date.now()).toString();
-            }
-                 return todo;});
+                }
+                return todo;
+            });
             return [...state]
         default:
            return state;
