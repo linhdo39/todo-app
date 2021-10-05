@@ -13,7 +13,7 @@ export default function Create ({user, todos, dispatch}) {
      }
 
      function createHandler() {
-        dispatch({type: 'CREATE_TODO', id:new Date().getTime() +Math.random(), user, title, create_date: Date(Date.now()).toString(), description, completed:false, completed_date: ''})
+        dispatch({type: 'CREATE_TODO', id:new Date().getTime()*Math.random(), user, title, create_date: Date(Date.now()).toString(), description, completed:false, completed_date: ''})
      }
 
      return (
