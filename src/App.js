@@ -34,8 +34,8 @@ function App() {
     }, [user])
     
     const [ theme, setTheme ] = useState({
-        primaryColor: 'deepskyblue',
-        secondaryColor: 'coral'
+        primaryColor: '#CC5500',
+        secondaryColor: '#E97451'
     })
 
     const { data, isLoading } = todos;
