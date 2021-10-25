@@ -7,7 +7,7 @@
       "create_date": "10/19/2021",
       "description": "Try to finish the homework",
       "completed": false,
-      "completed_date": "10/24/2021"
+      "completed_date": ""
     },
     {
       "id": 1,
@@ -16,7 +16,7 @@
       "create_date": "10/20/2021",
       "description": "Clean up the house",
       "completed": false,
-      "completed_date": "10/24/2021"
+      "completed_date": ""
     },
     {
       "id": 2,
@@ -25,7 +25,7 @@
       "create_date": "10/21/2021",
       "description": "Cook dinner",
       "completed": false,
-      "completed_date": "10/24/2021"
+      "completed_date": ""
     }
   ],
   "users": [
@@ -38,6 +38,11 @@
       "username": "Linh",
       "password": "abcdef",
       "id": 2
+    },
+    {
+      "username": "TEST",
+      "password": "TEST1",
+      "id": 3
     }
   ],
   "themes": [
