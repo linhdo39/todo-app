@@ -1,59 +1,61 @@
-import {useReducer, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
+import {useResource} from 'react-request-hook';
 import User from './User/UserBar'
 import Create from './create'
 import Todolist from './todolist'
 import reducer from './reducer';
+import Header from './header';
+import ChangeTheme from './changeTheme';
+import { ThemeContext, StateContext } from './contexts';
 
 function App() {
-    const initialTodos = [
-        {
-            id: new Date().getTime()*Math.random(),
-            user: "Linh",
-            title: "Homework",
-            create_date: Date(Date.now()).toString(),
-            description: "Try to finish the homework",
-            completed: false,
-            completed_date:''
-        },
-        {
-            id: new Date().getTime()*Math.random(),
-            user: "Linh",
-            title: "House",
-            create_date: Date(Date.now()).toString(),
-            description: "Clean up the house",
-            completed: false,
-            completed_date:''
-        },
-        {
-            id: new Date().getTime()*Math.random(),
-            user: "Linh",
-            title: "Cook",
-            create_date: Date(Date.now()).toString(),
-            description: "Cook dinner",
-            completed: false,
-            completed_date:''
-        }
-    ]
+    const [ todos, getTodos ] = useResource(() => ({
+        url: '/todos',
+        method: 'get'
+      }))
+    
+    const [ state, dispatch ] = useReducer(reducer, { user: '', todos: [] })
 
-    const [state, dispatch] = useReducer(reducer, { user: '', todos: initialTodos })
-    const {user, todos} = state;
-
+    useEffect(getTodos, [])
+    
+    useEffect(() => {  
+        if (todos && todos.data) 
+        dispatch({ type: 'GET_TODOS', todos: todos.data.reverse()})
+    }, [todos])
+    
+    
+    const {user} = state;
     useEffect(() => {
         if (user) {
-            document.title = `${user}’s Todo`
+            document.title = `${user}’s Blog` 
         } else {
-            document.title = 'Todo'
+            document.title = 'Blog'
         }
     }, [user])
+    
+    const [ theme, setTheme ] = useState({
+        primaryColor: 'deepskyblue',
+        secondaryColor: 'coral'
+    })
+
+    const { data, isLoading } = todos;
 
     return (
         <div>
-            <User user={user} dispatchUser={dispatch} />
-        <br/><br/><hr/><br/>
-            {user && <Create user={user} todos ={todos} dispatch={dispatch} /> }
-        <Todolist Todos={todos} dispatch ={dispatch}/>
+            <ThemeContext.Provider value={theme}>
+                <StateContext.Provider value={{state: state, dispatch: dispatch}}>
+                    <Header text="To Do List" />
+                    <ChangeTheme theme={theme} setTheme={setTheme} />
+                    <User/>
+                    <br/><br/><hr/><br/> 
+                    {user && <Create /> }
+                    <>
+                        {isLoading && 'To do list loading...'} <Todolist />
+                    </>
+                </StateContext.Provider>
+            </ThemeContext.Provider>
         </div>
-    )
+      )
 }
 
 export default App;
