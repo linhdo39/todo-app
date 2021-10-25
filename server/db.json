@@ -1,0 +1,63 @@
+{
+  "todos": [
+    {
+      "id": 0,
+      "user": "Linh",
+      "title": "Homework",
+      "create_date": "10/19/2021",
+      "description": "Try to finish the homework",
+      "completed": false,
+      "completed_date": "10/24/2021"
+    },
+    {
+      "id": 1,
+      "user": "Linh",
+      "title": "House",
+      "create_date": "10/20/2021",
+      "description": "Clean up the house",
+      "completed": false,
+      "completed_date": "10/24/2021"
+    },
+    {
+      "id": 2,
+      "user": "Linh",
+      "title": "Cook",
+      "create_date": "10/21/2021",
+      "description": "Cook dinner",
+      "completed": false,
+      "completed_date": "10/24/2021"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "paul",
+      "password": "badpassword"
+    },
+    {
+      "username": "Linh",
+      "password": "abcdef",
+      "id": 2
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "name": "Blue-tone",
+      "primaryColor": "#2952a3",
+      "secondaryColor": "#66c2ff"
+    },
+    {
+      "id": 2,
+      "name": "Purple-tone",
+      "primaryColor": "#8a00e6",
+      "secondaryColor": "#ffb3b3"
+    },
+    {
+      "id": 3,
+      "name": "Gray-tone",
+      "primaryColor": "#36454F",
+      "secondaryColor": "#7393B3"
+    }
+  ]
+}
