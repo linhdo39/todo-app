@@ -28,7 +28,6 @@ export default function Todo({id,user, title, create_date, description,completed
     return (
         <div>
             <h3 style ={{color: secondaryColor}}>{title}</h3>
-            <p> id: {id} </p>
             <p><b>Create by:</b> {user}</p>
             <p><b>Description:</b> {description}</p>
             <p><b>Date Created:</b> {create_date} </p>
