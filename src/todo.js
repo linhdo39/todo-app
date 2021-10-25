@@ -1,22 +1,40 @@
 import React from 'react';
+import { useContext } from 'react';
+import { ThemeContext, StateContext } from './contexts'
+import { useResource } from 'react-request-hook';
+export default function Todo({id,user, title, create_date, description,completed,completed_date}) {
+    
+    const { secondaryColor } = useContext(ThemeContext)
+    const {dispatch} = useContext(StateContext)
+    const [Todo , updateTodo ] = useResource(() => ({
+        url: '/todos/'+ parseInt(id),
+        method: 'patch',
+        data: {completed:!completed,completed_date:new Date(Date.now()).toLocaleDateString('en-us')}
+    }))
 
-export default function Todo({id,user, title, create_date, description,completed,completed_date,dispatch}) {
-    function checkboxHandler(event) {
-        dispatch({type: 'TOGGLE_TODO',completed, id })
+    const [todo , deleteTodo ] = useResource(() => ({
+        url: '/todos/' +id,
+        method: 'delete'
+    }))
+
+    function deleteHandler (evt) { 
+        deleteTodo({id})
+    }
+    
+    function completeHandler (evt) { 
+        updateTodo({completed:completed, completed_date:completed_date})
     }
 
-    function deleteHandler(event){
-        dispatch({type:'DELETE_TODO', id})
-    }
     return (
         <div>
-            <h3>{title}</h3>
-            <p>Create by: {user}</p>
-            <p>Description: {description}</p>
-            <p>Date Created: {create_date} </p>
-            <p><input type='checkbox' value={completed} onChange={e => {checkboxHandler();}} /> Complete</p>
-            <p>Date Completed: {completed_date} </p>
-            <p><button onClick={e => {deleteHandler();}}>Delete</button> </p>
+            <h3 style ={{color: secondaryColor}}>{title}</h3>
+            <p> id: {id} </p>
+            <p><b>Create by:</b> {user}</p>
+            <p><b>Description:</b> {description}</p>
+            <p><b>Date Created:</b> {create_date} </p>
+            <p><input type='checkbox' checked={completed} onClick={e => {dispatch({type: 'TOGGLE_TODO',completed:completed, id:id, completed_date:new Date(Date.now()).toLocaleDateString('en-us') });completeHandler()}} /> Complete</p>
+            {completed && <><b>Date Completed:</b> <i>{completed_date} </i></>}
+            <p><button onClick={e =>  {dispatch({type:'DELETE_TODO', id:id});deleteTodo()}}>Delete</button> </p>
         </div>
     )
 }
