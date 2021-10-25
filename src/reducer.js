@@ -14,31 +14,27 @@ function userReducer (state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newTodo = {
-                id:action.id,
+                id: state.length,
                 user: action.user,
                 title: action.title,
                 create_date: action.create_date,
                 description: action.description,
-                completed: action.completed,
-                completed_date: action.completed_date
+                completed: false,
+                completed_date: ""
             }
             return [newTodo, ...state ]
         case 'DELETE_TODO':
-            const newList = state.filter((todo) => todo.id !== action.id);
-            state = newList
-            return [...state]
+            return state.filter((p) => p.id !== action.id)
         case 'TOGGLE_TODO':
-            state.map((todo) => {
-                if (todo.id === action.id) {
-                    todo.completed= !action.completed;
-                    if(todo.completed ===false)
-                        todo.completed_date = '';
-                    else
-                        todo.completed_date = Date(Date.now()).toString();
+            return state.map((p) => {
+                if(p.id === action.id) {
+                    p.completed = !action.completed;
+                    p.completed_date = action.completed_date;
                 }
-                return todo;
-            });
-            return [...state]
+                return p;
+            })
+        case 'GET_TODOS':
+            return action.todos
         default:
            return state;
     }
