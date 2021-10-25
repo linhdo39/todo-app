@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import Logout from './logout'
 import Registration from './registration'
 import Login from './login'
+import { StateContext } from '../contexts'
 
-export default function User({user, dispatchUser}) {
-  if (user) {
-      return <Logout user={user} dispatchUser={dispatchUser} />
-  } else {
-      return (
-          <>
-            <Login dispatchUser={dispatchUser} />
-            <Registration dispatchUser={dispatchUser} />
-          </>
-      )
+export default function User() {
+  const {state} = useContext(StateContext)
+  if (state.user) {
+    return <Logout/>
+  } 
+  else {
+    return (
+      <>
+      <Login/>
+      <Registration/>
+      </>
+    )
   }
 }
