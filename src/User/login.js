@@ -29,7 +29,6 @@ export default function Login({show, handleClose}){
 
     useEffect(() => {
         if (user && user.data) {
-        console.log(user)
             if (user.data.length > 0) {
                             setFailed(false)
                             dispatch({type: 'LOGIN', username: user.data[0].username })
