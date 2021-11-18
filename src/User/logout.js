@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { StateContext } from '../contexts';
+import { StateContext } from '../Contexts';
+
 export default function Logout() {
 	const {state} = useContext(StateContext)
 	const {dispatch} = useContext(StateContext)
