@@ -5,6 +5,8 @@ function userReducer (state, action) {
             return action.username
         case 'LOGOUT':
             return ''
+        case 'GET_USERS':
+            return action.users
         default:
             return state;
     }
@@ -35,15 +37,26 @@ function userReducer (state, action) {
             })
         case 'GET_TODOS':
             return action.todos
+        case 'GET_PROFILE':
+            return state.filter((p) => p.username === action.username)
         default:
            return state;
     }
   }
 
+  function usersReducer(state, action){
+    switch (action.type) {
+        case 'GET_USERS':
+            return action.users
+        default:
+            return state;
+        }
+  }
 
   export default function reducer (state, action) {
     return {
         user: userReducer(state.user, action),
+        users: usersReducer(state.users, action),
         todos: todoReducer(state.todos, action)
     }
 }
