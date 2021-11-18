@@ -1,10 +1,13 @@
 import React, {useContext, useState} from 'react'
 import { useResource } from 'react-request-hook';
-import { StateContext } from '../contexts';
+import { StateContext } from '../Contexts';
 import { useEffect} from 'react';
+import { Modal } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 
-export default function Login(){
+export default function Login({show, handleClose}){
 	const {dispatch} = useContext(StateContext)
 
     const [username, setUsername] = useState('');
@@ -37,20 +40,24 @@ export default function Login(){
     }, [user])
 
 	return (
-		<form onSubmit ={event => {event.preventDefault(); login(username, password);} }>
-		    <div> <h3> Login </h3> </div>
-		    <div>
-			<label htmlFor="login-username">Username:</label>
-			</div>
-			<input type="text" value ={username} onChange ={userNameHandler} name="login-username" id="login-username" />
-			<div>
-			<label htmlFor="login-password">Password:</label>
-			</div>
-			<input type="password" value={password} onChange={passwordHandler} name="login-password" id="login-password" />
-			{failed && <p style={{ color: 'red' }}>Invalid username or password</p>}
-			<div>
-			<input type="submit" value="Login" />
-			</div>
-		</form>
+		 <Modal show={show} onHide={handleClose}>
+		 <Form onSubmit={e => { e.preventDefault(); login(username, password); handleClose() }}>
+		   <Modal.Header closeButton>
+			 <Modal.Title>Login</Modal.Title>
+		   </Modal.Header>
+		   <Modal.Body>
+			 <Form.Label htmlFor="login-username">Username:</Form.Label>
+			 <Form.Control type="text" value={username} onChange={userNameHandler} name="login-username" id="login-username" />
+			 <Form.Label htmlFor="login-password">Password:</Form.Label>
+			 <Form.Control type="password" value={password} onChange={passwordHandler} name="login-password" id="login-password" />
+			 {failed && <Form.Text style={{ color: 'red' }}>Invalid username or password</Form.Text>}
+		   </Modal.Body>
+		   <Modal.Footer>
+			 <Button variant="secondary" onClick={handleClose}>Cancel</Button>
+			 <Button variant="primary" disabled={username.length === 0} type="submit">Login</Button>
+		   </Modal.Footer>
+		 </Form>
+	   </Modal>
+   
 	)
 }
