@@ -1,15 +1,6 @@
 {
   "todos": [
     {
-      "id": 0,
-      "user": "Linh",
-      "title": "Homework",
-      "create_date": "10/19/2021",
-      "description": "Try to finish the homework",
-      "completed": false,
-      "completed_date": ""
-    },
-    {
       "id": 1,
       "user": "Linh",
       "title": "House",
@@ -25,7 +16,15 @@
       "create_date": "10/21/2021",
       "description": "Cook dinner",
       "completed": false,
-      "completed_date": ""
+      "completed_date": "11/17/2021"
+    },
+    {
+      "user": "Linh",
+      "title": "test 10",
+      "create_date": "11/17/2021",
+      "description": "test 10",
+      "completed": false,
+      "id": 3
     }
   ],
   "users": [
@@ -38,11 +37,6 @@
       "username": "Linh",
       "password": "abcdef",
       "id": 2
-    },
-    {
-      "username": "TEST",
-      "password": "TEST1",
-      "id": 3
     }
   ],
   "themes": [
