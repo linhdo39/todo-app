@@ -29,8 +29,8 @@ function App() {
         '/todo/:id': route (req => 
             {return {view: <TodoPage id = {req.params.id}/>}}),
         '/users' :route({view:<Users/>}),
-        '/users/:userId' : route (req => 
-            {return {view: <Profile username = {req.params.username}/>}}),
+        '/users/:id' : route (req => 
+            {return {view:<Profile id = {req.params.id}/>}}),
     })
 
     return (
