@@ -11,7 +11,7 @@ export default function HomePage () {
         url: '/todos',
         method: 'get'
       }))
-
+      
     useEffect(getTodos, [])
     useEffect(() => {  
         if (todos && todos.data) 
