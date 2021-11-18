@@ -38,7 +38,9 @@ function userReducer (state, action) {
         case 'GET_TODOS':
             return action.todos
         case 'GET_PROFILE':
-            return state.filter((p) => p.username === action.username)
+            console.log(action.user.username)
+            console.log(state)
+            return state.filter((p) => p.user === action.user.username)
         default:
            return state;
     }
@@ -46,7 +48,7 @@ function userReducer (state, action) {
 
   function usersReducer(state, action){
     switch (action.type) {
-        case 'GET_USERS':
+        case 'USERS':
             return action.users
         default:
             return state;
