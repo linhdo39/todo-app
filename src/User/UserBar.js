@@ -1,21 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext,useState } from 'react'
+import {Button} from 'react-bootstrap'
+import Login from './Login'
+import Logout from './Logout'
+import Registration from './Registration'
+import { StateContext } from '../Contexts'
 
-import Logout from './logout'
-import Registration from './registration'
-import Login from './login'
-import { StateContext } from '../contexts'
+export default function UserBar() {
 
-export default function User() {
   const {state} = useContext(StateContext)
+  const [showLogin, setShowLogin] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+
   if (state.user) {
     return <Logout/>
   } 
   else {
     return (
-      <>
-      <Login/>
-      <Registration/>
-      </>
+      <div className="justify-content-end">
+        <Button variant="link" onClick={(e) => setShowLogin(true)}> 
+          Login
+        </Button>
+        <Login show={showLogin} handleClose={() => setShowLogin(false)} />
+        <Button variant="link" onClick={(e) => setShowRegister(true)}>
+          Register
+        </Button>
+        <Registration show={showRegister} handleClose={() => setShowRegister(false)} />
+  </div>
+
     )
   }
 }
