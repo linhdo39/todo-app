@@ -29,17 +29,13 @@ export default function ChangeTheme ({ theme, setTheme }) {
     return ( <div>
         {isLoading && 'Loading themes...'}
 
-        <NavDropdown title = "Change Theme" id = "basic-nav-dropdown"> 
-        <NavDropdown.Item>
-            {data && 
-                data.map((t, i) =>
+        <NavDropdown title="ChangeTheme" id="basic-nav-dropdown">
+            {data && data.map((t, i) =>
                     <NavDropdown.Item>
-                        <ThemeItem key ={'theme-'+1} theme = {t} active = {isActive(t)} onClick = {()=> setTheme(t)}></ThemeItem>
+                    <ThemeItem key={i} theme={t} active={isActive(t)} onClick={() => setTheme(t)} />
                     </NavDropdown.Item>
-                )
-            }
-        </NavDropdown.Item>
-        </NavDropdown>
+            )} 
+         </NavDropdown>
     </div>
     )
 }
