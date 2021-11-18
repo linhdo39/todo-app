@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import Todo from './todo'
+import Todo from './Todo'
 
-import { StateContext } from './contexts'
+import { StateContext } from './Contexts'
 
 
 export default function Todolist() {
