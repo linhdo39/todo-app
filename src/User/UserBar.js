@@ -2,7 +2,7 @@ import React, { useContext,useState } from 'react'
 import {Button} from 'react-bootstrap'
 import Login from './Login'
 import Logout from './Logout'
-import Registration from './Registration'
+import Register from './Register'
 import { StateContext } from '../Contexts'
 
 export default function UserBar() {
@@ -24,7 +24,7 @@ export default function UserBar() {
         <Button variant="link" onClick={(e) => setShowRegister(true)}>
           Register
         </Button>
-        <Registration show={showRegister} handleClose={() => setShowRegister(false)} />
+        <Register show={showRegister} handleClose={() => setShowRegister(false)} />
   </div>
 
     )
