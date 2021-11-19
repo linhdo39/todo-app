@@ -46,7 +46,7 @@ export default function Profile ({ id }) {
           <div>
               <Todolist/>
               <hr />
-              <div><Link href="/">Go back</Link></div>
+              <div><Link href="/users">Go back</Link></div>
           </div>
       )
 }
