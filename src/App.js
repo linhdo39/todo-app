@@ -3,8 +3,8 @@ import HeaderBar from './Page/HeaderBar';
 import HomePage from './Page/HomePage';
 import Create from './Create';
 import TodoPage from './Page/TodoPage';
-import Profile from './User/Profile';
-import Users from "./User/Users"
+import Profile from './Page/ProfilePage';
+import UsersPage from "./Page/UsersPage"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Col} from 'react-bootstrap';
 import { mount, route } from 'navi';
@@ -28,7 +28,7 @@ function App() {
         '/todo/create': route ({view:<Create/>}),
         '/todo/:id': route (req => 
             {return {view: <TodoPage id = {req.params.id}/>}}),
-        '/users' :route({view:<Users/>}),
+        '/users' :route({view:<UsersPage/>}),
         '/users/:id' : route (req => 
             {return {view:<Profile id = {req.params.id}/>}}),
     })
