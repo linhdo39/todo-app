@@ -2,10 +2,9 @@
 import React, {useEffect, useContext} from 'react'
 import { StateContext } from '../Contexts'
 import { useResource } from 'react-request-hook'
-import Todolist from '../Todolist'
-import UsersMap from './UsersMap'
+import UsersMap from '../User/UsersMap'
 
-export default function HomePage () {
+export default function UsersPage () {
     const { state, dispatch } = useContext(StateContext)
     
     const [ users, getUsers ] = useResource(() => ({
