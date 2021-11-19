@@ -38,8 +38,6 @@ function userReducer (state, action) {
         case 'GET_TODOS':
             return action.todos
         case 'GET_PROFILE':
-            console.log(action.user.username)
-            console.log(state)
             return state.filter((p) => p.user === action.user.username)
         default:
            return state;
