@@ -2,10 +2,9 @@ import React, {useContext, useEffect} from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-navi';
 import { ThemeContext, StateContext } from '../Contexts';
-import Create from '../Create';
 import ChangeTheme from '../ChangeTheme';
-import UserBar from '../User/UserBar';
-import Header from '../Header';
+import UserBar from '../Authorization/UserBar';
+import Header from './Header';
 
 
 export default function HeaderBar({setTheme}){
@@ -14,12 +13,12 @@ export default function HeaderBar({setTheme}){
     const { user } = state
 
     useEffect(() => {
-        if (user) {
-            document.title = `${user}’s Blog` 
+        if (user.username) {
+            document.title = `${user.username}’s Blog` 
         } else {
             document.title = 'Blog'
         }
-    }, [user])
+    }, [user.username])
 
     return (
         <Navbar bg="light" expand="lg">
@@ -28,10 +27,10 @@ export default function HeaderBar({setTheme}){
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    {user && <Nav.Link><Link href="/users/">Show All Users</Link></Nav.Link>}
+                    {user.username && <Nav.Link><Link href="/users/">Show All Users</Link></Nav.Link>}
                 </Nav>
                 <Nav className="me-auto">
-                    {user && <Nav.Link><Link href="/todo/create">Create New Todo</Link></Nav.Link>}
+                    {user.username &&  <Nav.Link><Link href="/todos/create">Create New Todo</Link></Nav.Link>}
                     <ChangeTheme theme={theme} setTheme={setTheme} />
                 </Nav>
                
