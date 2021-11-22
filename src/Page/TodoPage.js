@@ -1,24 +1,41 @@
-import React, {useEffect} from "react"
+import React,{ useEffect, useContext } from "react"
+import { StateContext } from '../Contexts'
 import { useResource } from "react-request-hook"
-import Todo from "../Todo"
+import Todo from "../Todos/Todo"
+import HomeTodo from "../Todos/HomeTodo"
 import { Link } from 'react-navi'
 
 export default function TodoPage ({ id }) {
+    const {state} = useContext(StateContext);  
+    const{user} = state
     const [ todo, getTodos ] = useResource(() => ({
-        url: '/todos/' + parseInt(id),
+        url: `/todos/${id}`,
+        headers: {"Authorization": `${state.user.access_token}`},
         method: 'get'
     }))
 
     useEffect(getTodos, [id])
-
-    return (
+    if(user && todo.data){
+        if(user.username === todo.data.user){
+            return (
+                <div>
+                    {(todo && todo.data)
+                        ? <Todo {...todo.data} />
+                        : 'Loading...'
+                    }
+                    <hr />
+                    <div><Link href="/">Go back</Link></div>
+                </div>
+            )}}
+    return(
         <div>
             {(todo && todo.data)
-                ? <Todo {...todo.data} />
-                : 'Loading...'
+                    ? <HomeTodo {...todo.data} />
+                    : 'Loading...'
             }
             <hr />
             <div><Link href="/">Go back</Link></div>
         </div>
     )
+        
 }
