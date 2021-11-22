@@ -1,12 +1,18 @@
 function userReducer (state, action) {
     switch (action.type) {
         case 'LOGIN':
-        case 'REGISTRATION':
-            return action.username
-        case 'LOGOUT':
-            return ''
+        case 'REGISTER':
+            return {
+                'username': action.username,
+                'access_token': action.access_token
+            }
+        case 'LOGOUT':
+            return {
+                'username': undefined,
+                'access_token': undefined
+            }
         case 'GET_USERS':
-            return action.users
+            return action.user
         default:
             return state;
     }
@@ -16,21 +22,21 @@ function userReducer (state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newTodo = {
-                id: state.length,
+                id: action.id,
                 user: action.user,
                 title: action.title,
                 create_date: action.create_date,
                 description: action.description,
-                completed: false,
-                completed_date: ""
+                completed: action.completed,
+                completed_date: action.completed_date
             }
-            return [newTodo, ...state ]
+            return [newTodo,...state]
         case 'DELETE_TODO':
-            return state.filter((p) => p.id !== action.id)
+            return state.filter((p) => p._id !== action._id)
         case 'TOGGLE_TODO':
             return state.map((p) => {
-                if(p.id === action.id) {
-                    p.completed = !action.completed;
+                if(p._id === action._id) {
+                    p.completed = action.completed;
                     p.completed_date = action.completed_date;
                 }
                 return p;
@@ -38,7 +44,7 @@ function userReducer (state, action) {
         case 'GET_TODOS':
             return action.todos
         case 'GET_PROFILE':
-            return state.filter((p) => p.user === action.user.username)
+            return action.users
         default:
            return state;
     }
