@@ -20,7 +20,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
     useEffect(getThemes, [])
 
     const { data, isLoading } = themes
-
+    
 
     function isActive (t) {     
         return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor 
@@ -30,7 +30,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
         {isLoading && 'Loading themes...'}
 
         <NavDropdown title="ChangeTheme" id="basic-nav-dropdown">
-            {data && data.map((t, i) =>
+            {data && themes.data.map((t, i) =>
                     <NavDropdown.Item>
                     <ThemeItem key={i} theme={t} active={isActive(t)} onClick={() => setTheme(t)} />
                     </NavDropdown.Item>
