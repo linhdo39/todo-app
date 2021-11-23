@@ -11,7 +11,13 @@ export default function HomePage () {
         method: 'get',
         headers: {"Authorization":`${state.user.access_token}`}
       }))
-      
+    
+    const [ users, getUsers ] = useResource(() => ({
+      url: '/users',
+      headers: {"Authorization": `${state.user.access_token}`},
+      method: 'get'
+    }))
+
     useEffect(() => {
         getTodos()
     }, [state.user.access_token])
@@ -21,6 +27,14 @@ export default function HomePage () {
         if (todos && todos.isLoading === false && todos.data) 
         dispatch({ type: 'GET_TODOS', todos: todos.data.todos})
     }, [todos])
+
+    useEffect(getUsers, [state.user.access_token])
+
+    
+    useEffect(() => {  
+        if (users.data) 
+        dispatch({ type: 'USERS', users: users.data})
+    }, [users])
 
     const { data, isLoading } = todos;
 
