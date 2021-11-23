@@ -8,18 +8,23 @@ import { Link } from 'react-navi';
 import {Button} from 'react-bootstrap'
 import { useNavigation } from 'react-navi'
 
-
 export default function Todo({_id,user, title, create_date, description,completed,completed_date, short = false}) {
     const {state, dispatch} = useContext(StateContext)
     const { secondaryColor } = useContext(ThemeContext)
     const {users} = state;
     const navigation = useNavigation()
 
+    const [Todo, getTodos ] = useResource(() => ({
+        url: `/todos/${_id}`,
+        headers: {"Authorization": `${state.user.access_token}`},
+        method: 'get'
+    }))
+
     const [toggledTodo , updateTodo ] = useResource(() => ({
         url: `/todos/${_id}`,
         method: 'patch',
         headers: {"Authorization": `${state.user.access_token}`},
-        data: {completed:completed,completed_date:new Date(Date.now()).toLocaleDateString('en-us')}
+        data: {completed:!completed,completed_date:new Date(Date.now()).toLocaleDateString('en-us')}
     }))
 
     const [todo , deleteTodo ] = useResource(() => ({
@@ -37,15 +42,18 @@ export default function Todo({_id,user, title, create_date, description,complete
 
     useEffect(() => {
         if (toggledTodo && toggledTodo.data && toggledTodo.isLoading === false) {
-            dispatch({type: 'TOGGLE_TODO', completed:toggledTodo.data.completed, completed_date:toggledTodo.data.completed_date, _id})}
+            dispatch({type: 'TOGGLE_TODO', completed:toggledTodo.data.completed, completed_date:toggledTodo.data.completed_date, _id})
+        }
     }, [toggledTodo])
 
     useEffect(() => {
-        if(todo && todo.data &&todo.isLoading ===false)
-        {dispatch({type: 'DELETE_TODO', _id: _id})
-        navigation.navigate(`/todos/delete/${navigation_id}`)}
+        if(todo && todo.data &&todo.isLoading ===false){
+            dispatch({type: 'DELETE_TODO', _id: _id})
+            navigation.navigate(`/todos/delete/${navigation_id}`)
+        }
     }, [todo])
 
+    useEffect(getTodos, [_id])
     let processedDescription = description
 
      if (short) {
@@ -53,7 +61,11 @@ export default function Todo({_id,user, title, create_date, description,complete
                processedDescription = description.substring(0, 30) + '...'
           }
      }
-    return (
+     
+     if(toggledTodo.data) 
+        completed = toggledTodo.data.completed
+        
+     return (
         <Card>
           <Card.Body>
               <Card.Title><Link style={{ color: secondaryColor }} href={`/todos/${_id}`}>{title}</Link>
@@ -66,7 +78,7 @@ export default function Todo({_id,user, title, create_date, description,complete
               </Card.Text>
               <div><input type='checkbox' checked={completed} onClick={e => {updateTodo(_id, e.target.checked)}} /> 
                  <b> Complete? </b><br/>
-                {completed && <><b>Date Completed:</b> <i>{completed_date} </i></>}
+                {completed &&<><b>Date Completed:</b> <i>{completed_date} </i></>}
                 </div>
                 <br/>
               <Button  style = {{background:secondaryColor}} onClick = {e =>  deleteTodo(_id)}> Delete</Button>
