@@ -34,6 +34,7 @@ function userReducer (state, action) {
         case 'DELETE_TODO':
             return state.filter((p) => p._id !== action._id)
         case 'TOGGLE_TODO':
+            console.log(action)
             return state.map((p) => {
                 if(p._id === action._id) {
                     p.completed = action.completed;
