@@ -11,8 +11,14 @@ import { useNavigation } from 'react-navi'
 export default function Todo({_id,user, title, create_date, description,completed,completed_date, short = false}) {
     const {state, dispatch} = useContext(StateContext)
     const { secondaryColor } = useContext(ThemeContext)
+    const { primaryColor } = useContext(ThemeContext)
     const {users} = state;
     const navigation = useNavigation()
+    const [checkbox, setCheckBox] = useState('')
+
+    function checkboxHandler (evt) { 
+		setCheckBox(evt.target.value) 
+	}
 
     const [Todo, getTodos ] = useResource(() => ({
         url: `/todos/${_id}`,
@@ -62,9 +68,11 @@ export default function Todo({_id,user, title, create_date, description,complete
           }
      }
      
-     if(toggledTodo.data) 
+    if(toggledTodo.data) {
         completed = toggledTodo.data.completed
-        
+        completed_date = toggledTodo.data.completed_date
+    }
+
      return (
         <Card>
           <Card.Body>
@@ -76,12 +84,12 @@ export default function Todo({_id,user, title, create_date, description,complete
               <Card.Text>
                   {processedDescription}                  
               </Card.Text>
-              <div><input type='checkbox' checked={completed} onClick={e => {updateTodo(_id, e.target.checked)}} /> 
+              <div><input type='checkbox' checked={completed} onChange ={checkboxHandler} onClick={e => {updateTodo(_id, e.target.checked)}} /> 
                  <b> Complete? </b><br/>
                 {completed &&<><b>Date Completed:</b> <i>{completed_date} </i></>}
                 </div>
                 <br/>
-              <Button  style = {{background:secondaryColor}} onClick = {e =>  deleteTodo(_id)}> Delete</Button>
+              <Button  background-color={{color: secondaryColor}}  onClick = {e =>  deleteTodo(_id)}> Delete</Button>
               <div>{short && <Link href={`/todos/${_id}`}>View full post</Link>}</div>
             
           </Card.Body>
