@@ -4,7 +4,6 @@ import { useResource } from "react-request-hook"
 import Todo from "../Todos/Todo"
 import HomeTodo from "../Todos/HomeTodo"
 import { Link } from 'react-navi'
-import { useState } from "react"
 
 export default function TodoPage ({ id }) {
     const {state} = useContext(StateContext);  
