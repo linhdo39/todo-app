@@ -6,7 +6,6 @@ import { Link } from 'react-navi';
 
 export default function HomeTodo({_id,user, title, create_date, description, short = false}) {
     const { secondaryColor } = useContext(ThemeContext)
-
     let processedDescription = description
 
      if (short) {
