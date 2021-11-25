@@ -63,8 +63,8 @@ export default function Todo({_id,user, title, create_date, description,complete
     let processedDescription = description
 
      if (short) {
-          if (description.length > 30) {
-               processedDescription = description.substring(0, 30) + '...'
+          if (description.length > 100) {
+               processedDescription = description.substring(0, 100) + '...'
           }
      }
      
@@ -74,9 +74,10 @@ export default function Todo({_id,user, title, create_date, description,complete
     }
 
      return (
-        <Card>
+        <div>
+        <Card  style = {{background:secondaryColor}} >
           <Card.Body>
-              <Card.Title><Link style={{ color: secondaryColor }} href={`/todos/${_id}`}>{title}</Link>
+              <Card.Title><Link style={{ color: primaryColor }} href={`/todos/${_id}`}>{title}</Link>
               </Card.Title>
               <Card.Subtitle>
               <p> <b>Create by:</b> {user} on {create_date} </p> 
@@ -89,10 +90,12 @@ export default function Todo({_id,user, title, create_date, description,complete
                 {completed &&<><b>Date Completed:</b> <i>{completed_date} </i></>}
                 </div>
                 <br/>
-              <Button  background-color={{color: secondaryColor}}  onClick = {e =>  deleteTodo(_id)}> Delete</Button>
-              <div>{short && <Link href={`/todos/${_id}`}>View full post</Link>}</div>
-            
+              <Button  style = {{background:primaryColor}} onClick = {e =>  deleteTodo(_id)}> Delete</Button>
+              <div>{short && <Link href={`/todos/${_id}`}>View full post</Link>}</div>      
           </Card.Body>
           </Card>
+          <div>     </div>
+          <hr/>
+        </div>
     )
 }
