@@ -31,9 +31,11 @@ export default function HeaderBar({setTheme}){
                 </Nav>
                 <Nav className="me-auto">
                     {user.username &&  <Nav.Link><Link href="/todos/create">Create New Todo</Link></Nav.Link>}
+                </Nav>
+                <Nav className="me-auto">
                     <ChangeTheme theme={theme} setTheme={setTheme} />
                 </Nav>
-               
+
                 <React.Suspense fallback={"Loading..."}>
                 <UserBar />
                 </React.Suspense>
