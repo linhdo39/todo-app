@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 import Todo from './Todo'
-import { StateContext } from '../Contexts'
-
+import { ThemeContext, StateContext } from '../Contexts'
+import { Card } from 'react-bootstrap'
+import { Link } from 'react-navi'
 
 export default function Todolist() {
     const {state} = useContext(StateContext)
     const {todos} = state;
+
     return (
        <div>
-            {todos.map((p, i) => <Todo {...p} id={p.id}
+            {todos.length > 0? todos.map((p, i) => <Todo {...p} id={p.id}
                                               user= {p.user}
                                               short ={true}
                                               title={p.title}
@@ -17,7 +19,14 @@ export default function Todolist() {
                                               completed= {p.completed}
                                               completed_date ={p.completed_date}
                                               key={'Todo-' + i} 
-                                              />)}
+                                              />): 
+                                <Card>
+                                <Card.Body>
+                                    <Card.Text>
+                                        No To-do Item. <Link href="/todos/create"> You can create new to-do item here </Link>                   
+                                    </Card.Text>
+                                </Card.Body>
+                                </Card>}
         </div>
     )
 }
