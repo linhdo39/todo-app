@@ -35,7 +35,7 @@ export default function TodoPage ({ id }) {
                     ? <HomeTodo {...todo.data} />
                     : 'Loading...'
             }
-            <hr />
+            
             <div><Link href="/">Go back to HomePage</Link></div>
 
         </div>
