@@ -31,10 +31,7 @@ export default function Login({show, handleClose}){
     useEffect(() => {
         if (user && user.isLoading === false && (user.data || user.error)) {
             if (!user.error) {
-            	setFailed(false)
                 dispatch({type: 'LOGIN', id:user.data._id, username: user.data.username, access_token: user.data.access_token })
-            } else {
-                setFailed(true)
             }
         } 
     }, [user])
