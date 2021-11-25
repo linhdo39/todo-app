@@ -5,18 +5,26 @@ import { useResource } from 'react-request-hook';
 import { Modal } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
+import { useNavigation } from 'react-navi'
 
 export default function Register({show, handleClose}) {
 
-  const {dispatch} = useContext(StateContext)
-  const [setStatus] = useState("")
-	
-  const [formData, setFormData] = useState({
+    const {dispatch} = useContext(StateContext)
+    const [setStatus] = useState("")
+  	const navigation = useNavigation()
+
+    const [formData, setFormData] = useState({
         username: "",
         password: "",
         passwordRepeat: ""
     })
     
+    const [ user1, login ] = useResource((username, password) => ({
+      url: 'auth/login',
+      method: 'post',
+        data: {username, password}
+    }))
+
     const [ user, register ] = useResource((username, password) => ({
         url: 'auth/register',
         method: 'post',
@@ -32,12 +40,14 @@ export default function Register({show, handleClose}) {
     useEffect(() => {
         if (user && user.isLoading === false && (user.data || user.error)) {
           if (user.error) {
-            setStatus("Registration failed, please try again later.")
-          } else {
-            setStatus("Registration successful. You may now login.")
+            alert("Registration failed, please try again later.")
+          } 
+          else {
+              alert("Registration succeed, please use your username and password to login.")
+              navigation.navigate('/')
           }
         }
-      }, [user])
+    }, [user])
 
     return (
            <Modal show={show} onHide={handleClose}>
@@ -55,7 +65,7 @@ export default function Register({show, handleClose}) {
              </Modal.Body>
              <Modal.Footer>
                <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-               <Button variant="primary" type="submit" >Register</Button>
+               <Button variant="primary" type="submit" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.passwordRepeat}>Register</Button>
              </Modal.Footer>
            </Form>
          </Modal>
