@@ -7,7 +7,7 @@ import { Link } from 'react-navi'
 export default function Todolist() {
     const {state} = useContext(StateContext)
     const {todos} = state;
-
+    const {secondaryColor} = useContext(ThemeContext)
     return (
        <div>
             {todos.length > 0? todos.map((p, i) => <Todo {...p} id={p.id}
@@ -20,7 +20,7 @@ export default function Todolist() {
                                               completed_date ={p.completed_date}
                                               key={'Todo-' + i} 
                                               />): 
-                                <Card>
+                                <Card style = {{background:secondaryColor}}>
                                 <Card.Body>
                                     <Card.Text>
                                         No To-do Item. <Link href="/todos/create"> You can create new to-do item here </Link>                   
