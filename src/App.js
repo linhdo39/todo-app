@@ -19,8 +19,8 @@ function App() {
 
     const [ theme, setTheme ] = useState({
         name:'Default',
-        primaryColor: '#CC5500',
-        secondaryColor: '#E97451',
+        primaryColor: '#000000',
+        secondaryColor: '#FFFFFF',
     })
     
     const routes = mount ({
@@ -40,9 +40,9 @@ function App() {
         <ThemeContext.Provider value = {theme}>
             <StateContext.Provider value={{state: state, dispatch: dispatch}}>
             <Router routes = {routes}>
-                <Container>
+                <Container> 
                     <HeaderBar setTheme = {setTheme}></HeaderBar>
-                    <hr />
+                    <hr/>
                     <View/>
                 </Container>
             </Router>
