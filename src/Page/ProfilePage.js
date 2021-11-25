@@ -5,6 +5,7 @@ import Todolist from "../Todos/Todolist"
 import { StateContext } from "../Contexts"
 import { useState } from "react"
 import HomeTodoList from "../Todos/HomeTodoList"
+
 export default function Profile ({ id }) {
   const { state, dispatch } = useContext(StateContext) 
   const todos = useState([])
