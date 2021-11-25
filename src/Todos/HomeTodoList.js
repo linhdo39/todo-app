@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import HomeTodo from './HomeTodo';
-import { StateContext } from '../Contexts'
+import { ThemeContext, StateContext } from '../Contexts'
 import { Card } from 'react-bootstrap';
 
 export default function HomeTodoList() {
     const {state} = useContext(StateContext)
+    const {secondaryColor} = useContext(ThemeContext)
     const {todos} = state;
     const items = todos
     return (
