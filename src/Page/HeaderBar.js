@@ -11,7 +11,7 @@ export default function HeaderBar({setTheme}){
     const theme = useContext(ThemeContext)
     const { state } = useContext(StateContext)
     const { user } = state
-
+    const {primaryColor} = useContext(ThemeContext)
     useEffect(() => {
         if (user.username) {
             document.title = `${user.username}’s Blog` 
@@ -23,19 +23,15 @@ export default function HeaderBar({setTheme}){
     return (
         <Navbar bg="light" expand="lg">
         <Container>
-            <Navbar.Brand href="/"><Header text="My Todo" /></Navbar.Brand>
+            <Navbar.Brand  style = {{color :primaryColor}}> My Todo </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
+                    <Nav.Link> <Link href="/">Home</Link></Nav.Link>
                     {user.username && <Nav.Link><Link href="/users/">Show All Users</Link></Nav.Link>}
-                </Nav>
-                <Nav className="me-auto">
                     {user.username &&  <Nav.Link><Link href="/todos/create">Create New Todo</Link></Nav.Link>}
-                </Nav>
-                <Nav className="me-auto">
                     <ChangeTheme theme={theme} setTheme={setTheme} />
                 </Nav>
-
                 <React.Suspense fallback={"Loading..."}>
                 <UserBar />
                 </React.Suspense>
