@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { StateContext } from '../Contexts'
+import { ThemeContext, StateContext } from '../Contexts'
 import { useResource } from 'react-request-hook'
 import { useEffect } from 'react'
 import { useNavigation } from 'react-navi'
@@ -10,6 +10,7 @@ export default function Create () {
    const navigation = useNavigation()
    const {state, dispatch} = useContext(StateContext)
    const {user} = state;
+   const {primaryColor} = useContext(ThemeContext)
 
    const [Todo , createTodo ] = useResource(({user, title, description}) => ({
       url: '/todos',
@@ -41,14 +42,16 @@ export default function Create () {
          <div>User: <b>{user.username}</b></div>
          <div>
             <label htmlFor="create-title">Title:</label>
-            <input type="text" value={title} onChange={titleHandler} name="create-title" id="create-title" />
+            <div></div>
+            <input style = 'width: 100%' type="text" value={title} onChange={titleHandler} name="create-title" id="create-title" />
          </div>
          <div>
             <label htmlFor="create-description">Description: </label>
-            <textarea value={description} onChange={descriptionHandler}/>
+            <div> </div>
+            <textarea row = '5' style="width: 100%; max-width: 100%;"value={description} onChange={descriptionHandler}/>
          </div>
 
-         <input type="submit" value="Create" />
-      </form>
+         <input background-color = {{color: primaryColor}} type="submit" value="Create" />
+      </form> 
    )
 }
