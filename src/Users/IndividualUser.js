@@ -6,12 +6,16 @@ import { Link } from 'react-navi';
 
 export function IndividualUser({_id, username}){
     const { secondaryColor } = useContext(ThemeContext)
+    const {primaryColor} = useContext(ThemeContext)
         return (
-            <Card>
+            <div><Card  style = {{background:secondaryColor}} >
               <Card.Body>
-                  <Card.Title><Link style={{ color: secondaryColor }} href={`/users/${_id}`}>{username}</Link>
+                  <Card.Title><Link style={{ color: primaryColor }} href={`/users/${_id}`}>{username}</Link>
                   </Card.Title>
               </Card.Body>
               </Card>
+              <div> </div>
+          <hr/>
+          </div>
         )
     }
