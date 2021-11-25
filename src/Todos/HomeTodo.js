@@ -6,6 +6,7 @@ import { Link } from 'react-navi';
 
 export default function HomeTodo({_id,user, title, create_date, description, short = false}) {
     const { secondaryColor } = useContext(ThemeContext)
+    const {primaryColor} = useContext(ThemeContext)
     let processedDescription = description
 
      if (short) {
@@ -14,9 +15,10 @@ export default function HomeTodo({_id,user, title, create_date, description, sho
           }
      }
     return (
-        <Card>
+        <div>
+        <Card style = {{background:secondaryColor}}>
           <Card.Body>
-              <Card.Title><Link style={{ color: secondaryColor }} href={`/todos/${_id}`}>{title}</Link>
+              <Card.Title><Link style={{ color: primaryColor }} href={`/todos/${_id}`}>{title}</Link>
               </Card.Title>
               <Card.Subtitle>
               <p> <b>Create by:</b> {user} on {create_date} </p> 
@@ -24,9 +26,12 @@ export default function HomeTodo({_id,user, title, create_date, description, sho
               <Card.Text>
                   {processedDescription}                  
               </Card.Text>
-              {short && <Link href={`/todos/${_id}`}>View full post</Link>}
+              {short && <Link style={{ color: primaryColor }} href={`/todos/${_id}`}>View full post</Link>}
             
           </Card.Body>
           </Card>
+          <div>      </div>
+          <hr/>
+          </div>
     )
 }
