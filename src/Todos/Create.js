@@ -43,12 +43,12 @@ export default function Create () {
          <div>
             <label htmlFor="create-title">Title:</label>
             <div></div>
-            <input style = 'width: 100%' type="text" value={title} onChange={titleHandler} name="create-title" id="create-title" />
+            <input type="text" value={title} onChange={titleHandler} name="create-title" id="create-title" />
          </div>
          <div>
             <label htmlFor="create-description">Description: </label>
             <div> </div>
-            <textarea row = '5' style="width: 100%; max-width: 100%;"value={description} onChange={descriptionHandler}/>
+            <textarea value={description} onChange={descriptionHandler}/>
          </div>
 
          <input background-color = {{color: primaryColor}} type="submit" value="Create" />
