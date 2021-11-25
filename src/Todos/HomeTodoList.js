@@ -17,7 +17,7 @@ export default function HomeTodoList() {
                                               create_date ={p.create_date}
                                               description ={p.description}
                                               key={'Todo-' + i} 
-                                              />): <Card>
+                                              />): <Card style = {{background:secondaryColor}}>
                                               <Card.Body>
                                                   <Card.Text>
                                                       No Todo Items Found
